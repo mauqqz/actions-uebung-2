@@ -29,10 +29,16 @@ class Town:
 
     @residents.setter
     def residents(self, value):
-        if isinstance(value, int) and value >= 0:
-            self.__residents = value
+        # Hier ist die Änderung:
+        # Wir prüfen erst, ob es überhaupt eine Zahl ist
+        if not isinstance(value, int):
+             raise ValueError("Residents must be an integer.")
+        
+        # Wenn die Zahl negativ ist, setzen wir sie auf 0 (statt abzustürzen)
+        if value < 0:
+            self.__residents = 0
         else:
-            raise ValueError("Residents must be a non-negative integer.")
+            self.__residents = value
 
     def __str__(self):
         """Returns a human readable string of the object."""
