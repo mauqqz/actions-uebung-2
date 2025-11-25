@@ -1,0 +1,27 @@
+name: Unit tests with Python
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'example-python/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'example-python/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Test with Python
+      run: |
+        cd example-python
+        python3 -m unittest tests.test_town.TestTown
